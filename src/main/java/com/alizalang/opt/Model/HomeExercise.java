@@ -1,8 +1,7 @@
-package com.alizalang.opt.Model_Entity;
+package com.alizalang.opt.Model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.logging.log4j.util.PerformanceSensitive;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,11 +16,10 @@ public class HomeExercise {
     private Long id;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "clinician_id")
-    private Clinician clinician;
-
     private Long patientID;
+
+    @NotNull
+    private Long clinicianID;
 
     @NotNull
     private String videoURL;
@@ -34,7 +32,6 @@ public class HomeExercise {
 
     @NotNull
     private String frequencyPerWeek;
-
 
 
 }
