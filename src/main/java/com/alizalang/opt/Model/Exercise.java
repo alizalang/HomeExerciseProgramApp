@@ -9,25 +9,29 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Entity
-public class User {
+public class Exercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
-    private String firstName;
+    @ManyToOne
+    private Patient patient;
 
     @NotNull
-    private String lastName;
-
-    @Column(unique = true)
-    @NotNull
-    private String email;
+    private String videoURL;
 
     @NotNull
-    private String password;
+    private int sets;
 
-    protected  String role;
+    @NotNull
+    private int reps;
+
+    @NotNull
+    private String frequencyPerWeek;
+
+
+
 
 }

@@ -1,45 +1,36 @@
 package com.alizalang.opt.Model;
 
-
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Setter
 @Getter
 @Entity
-public class Clinician extends User{
+public class Clinician {
 
-
-
-    public Clinician(){
-       super.role = "clinician";
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotNull
-    private enum discipline{PT, OT};
+    private String firstName;
 
-    @OneToMany
-    private Set<Patient> patients = new HashSet<>();
+    @NotNull
+    private String lastName;
 
+    @Column(unique = true)
+    @NotNull
+    private String email;
 
+    @NotNull
+    private String password;
 
+    private String role = "clinician";
 
-
-
-//    public void createNewPatient(Patient patient){
-//        patients.add(patient);
-//    }
-//
-//    public void deletePatient(Patient patient){
-//        if (patients.contains(patient))
-//        patients.remove(patient);
-//    }
-
+    @NotNull
+    private String discipline;
 
 }

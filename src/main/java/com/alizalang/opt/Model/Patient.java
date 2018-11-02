@@ -6,36 +6,36 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Setter
 @Getter
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Patient extends User {
+public class Patient {
 
-    public Patient() {
-       super.role = "patient";
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotNull
-    private Long clinicianIDForThisPatient;
+    private String firstName;
 
-    @OneToMany
-    private Set<HomeExercise> homeExerciseProgram = new HashSet<>();
+    @NotNull
+    private String lastName;
 
+    @Column(unique = true)
+    @NotNull
+    private String email;
 
-//    public void removeExerciseFromProgram(HomeExercise homeExercise){
-//        homeExerciseProgram.remove(homeExercise);
-//    }
-//
-//
-//
-//    public void addExercisetoProgram(HomeExercise homeExercise){
-//        homeExerciseProgram.add(homeExercise);
-//    }
+    @NotNull
+    private String password;
 
+    private final String role = "patient";
+
+    @NotNull
+    @ManyToOne
+    private Clinician clinician;
 
 }
 
