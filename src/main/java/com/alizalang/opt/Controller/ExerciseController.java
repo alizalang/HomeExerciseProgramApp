@@ -2,21 +2,35 @@ package com.alizalang.opt.Controller;
 
 
 import com.alizalang.opt.Model.Exercise;
+import com.alizalang.opt.Model.Patient;
 import com.alizalang.opt.Repository_DAO.ExerciseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 
 @RestController
-@RequestMapping("/homeexercise")
+@CrossOrigin(origins = {"http://localhost:8080","http://localhost:8100"})
 public class ExerciseController {
 
 
+    @Autowired
     ExerciseRepository exerciseRepository;
 
-    @PostMapping
-    public Exercise createHomeExercise(@RequestBody Exercise exercise) {
-        return exerciseRepository.save(exercise);
+    @PostMapping(value="/exercises")
+    public ResponseEntity<Exercise> createNewExercise(@RequestBody Exercise exercise) {
+        return new ResponseEntity<>(exerciseRepository.save(exercise), HttpStatus.OK);
     }
+
+    @GetMapping(value="/exercises")
+    public ResponseEntity<Collection<Exercise>> readHomeExerciseProgram() {
+        return new ResponseEntity<>(exerciseRepository.findAll(), HttpStatus.OK);
+    }
+
+
 
 
 //    @GetMapping("/search")

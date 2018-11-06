@@ -1,34 +1,31 @@
 package com.alizalang.opt.Controller;
 
 import com.alizalang.opt.Model.Clinician;
-import com.alizalang.opt.Service.ClinicianService;
+import com.alizalang.opt.Repository_DAO.ClinicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/clinicians")
 @CrossOrigin(origins = {"http://localhost:8080","http://localhost:8100"})
 public class ClinicianController {
 
-    private ClinicianService clinicianService;
 
     @Autowired
-    public ClinicianController(ClinicianService clinicianService) {
-        this.clinicianService = clinicianService;
-    }
+    ClinicianRepository clinicianRepository;
 
-    //METHODS:
 
-    @PostMapping
+    @PostMapping(value="/clinicians")
     public ResponseEntity<Clinician> createNewClinician(@RequestBody Clinician clinician) {
-        return clinicianService.createClinician(clinician);
+        return new ResponseEntity<>(clinicianRepository.save(clinician), HttpStatus.CREATED);
     }
 
-    @GetMapping("/id/{id}")
-    public ResponseEntity<Clinician> readClinicianById(@PathVariable("id") Long id) {
-        return clinicianService.getClinicianById(id);
+    @GetMapping(value="/clinicians/email/{email}")
+    public Long readClinicianByEmail(@PathVariable String email) {
+        return clinicianRepository.findByClinicianEmail(email);
     }
+
 
 
 }
