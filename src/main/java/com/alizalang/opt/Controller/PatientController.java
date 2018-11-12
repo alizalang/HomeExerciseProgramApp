@@ -1,5 +1,6 @@
 package com.alizalang.opt.Controller;
 
+import com.alizalang.opt.Model.Clinician;
 import com.alizalang.opt.Model.Patient;
 import com.alizalang.opt.Repository_DAO.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,27 +18,16 @@ public class PatientController {
     @Autowired
     public PatientRepository patientRepository;
 
-    //METHODS:
-
     @PostMapping(value="/patients")
-    public ResponseEntity<Patient> createNewPatient(@RequestBody Patient patient) {
+    public ResponseEntity<Patient> createPatient(@RequestBody Patient patient) {
         return new ResponseEntity<>(patientRepository.save(patient), HttpStatus.CREATED);
     }
 
-    @GetMapping(value="/patients")
-    public ResponseEntity<Collection<Patient>> readAllPatients() {
-        return new ResponseEntity<>(patientRepository.findAll(), HttpStatus.OK);
+    @GetMapping(value ="/clinicians/{clinicianId}")
+    public ResponseEntity<Collection<Patient>> readPatientsByClinicianId(@PathVariable Long clinicianId) {
+        return new ResponseEntity<>(patientRepository.findPatientByClinicianId(clinicianId), HttpStatus.OK);
     }
-//
-//    @PutMapping(value="/patients/{id}")
-//    public ResponseEntity<Patient> clientRequestToUpdatePatient(@PathVariable Long id, @RequestBody Patient patient) {
-//        return new ResponseEntity<>(patientRepository.save(patient), HttpStatus.OK);    }
-//
-//    @DeleteMapping(value="/patients")
-//    public ResponseEntity<Patient> clientRequestToDeletePatient(@RequestBody Patient patient) {
-//        patientRepository.delete(patient);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+
 
 
 

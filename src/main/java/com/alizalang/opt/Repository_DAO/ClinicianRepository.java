@@ -9,6 +9,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface ClinicianRepository extends JpaRepository<Clinician, Long> {
 
-    @Query("select id from Clinician c where email = :email")
-    Long findByClinicianEmail(@Param("email")String email);
+    Clinician findClinicianByEmail(String email);
+
 }

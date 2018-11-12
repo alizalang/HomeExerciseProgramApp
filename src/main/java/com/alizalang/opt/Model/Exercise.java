@@ -18,10 +18,6 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "patient_id", nullable = false)
-//    private Patient patient;
-
     @NotNull
     private String video;
 
@@ -34,7 +30,10 @@ public class Exercise {
     @NotNull
     private String frequencyPerWeek;
 
-
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //@JoinColumn(name = "patient_id", nullable = false)
+    @NotNull
+    private Long patientId;
 
 
 }

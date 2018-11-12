@@ -21,43 +21,28 @@ public class ExerciseController {
     ExerciseRepository exerciseRepository;
 
     @PostMapping(value="/exercises")
-    public ResponseEntity<Exercise> createNewExercise(@RequestBody Exercise exercise) {
-        return new ResponseEntity<>(exerciseRepository.save(exercise), HttpStatus.OK);
+    public ResponseEntity<Exercise> createExercise(@RequestBody Exercise exercise) {
+        return new ResponseEntity<>(exerciseRepository.save(exercise), HttpStatus.CREATED);
     }
 
-    @GetMapping(value="/exercises")
-    public ResponseEntity<Collection<Exercise>> readHomeExerciseProgram() {
-        return new ResponseEntity<>(exerciseRepository.findAll(), HttpStatus.OK);
+    @GetMapping(value="/patients/{patientId}")
+    public ResponseEntity<Collection<Exercise>> readExerciseByPatientId(@PathVariable Long patientId) {
+        return new ResponseEntity<>(exerciseRepository.readExerciseByPatientId(patientId), HttpStatus.OK);
     }
 
 
 
 
-//    @GetMapping("/search")
-//    public List<Exercise> readBySearch(
-//            @RequestParam(value = "clinicianid", required = false) Long clinicianID,
-//            @RequestParam(value = "patientid", required = false) Long patientID
-//    ) {
-//        if (clinicianID != null && patientID != null)
-//            return exerciseRepository.findByClinicianIDAndPatientID(clinicianID, patientID);
-//        else if (clinicianID != null)
-//            return exerciseRepository.findByClinicianID(clinicianID);
-//        else if (patientID != null)
-//            return exerciseRepository.findByPatientID(patientID);
-//        else
-//            return exerciseRepository.findAll();
+
+//    @PutMapping
+//    public Exercise updateHomeExercise(@RequestBody Exercise exercise) {
+//        return exerciseRepository.save(exercise);
 //    }
-
-
-    @PutMapping
-    public Exercise updateHomeExercise(@RequestBody Exercise exercise) {
-        return exerciseRepository.save(exercise);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteHomeExercise(@PathVariable Long id) {
-        exerciseRepository.deleteById(id);
-    }
+//
+//    @DeleteMapping("/{id}")
+//    public void deleteHomeExercise(@PathVariable Long id) {
+//        exerciseRepository.deleteById(id);
+//    }
 
 
 }

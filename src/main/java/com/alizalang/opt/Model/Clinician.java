@@ -35,17 +35,13 @@ public class Clinician {
     @NotNull
     private String discipline;
 
-//    @OneToMany(cascade = CascadeType.ALL,
-//    fetch = FetchType.LAZY,
-//    mappedBy = "clinician")
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private Set<Patient> clinicianPatientDirectory = new HashSet<>();
-//
-//
-//
+
 //    public void addPatientToClinicianPatientDirectory(Patient patient){
 //        clinicianPatientDirectory.add(patient);
 //    }
-//
+
 //    public void removePatientFromClinicianPatientDirectory(Patient patient){
 //        clinicianPatientDirectory.remove(patient);
 //    }
